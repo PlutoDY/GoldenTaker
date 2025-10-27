@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "67072481159",
+    "project_id": "goldentaker-7c336",
+    "storage_bucket": "goldentaker-7c336.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67072481159:android:751cea825f4323b5b32522",
+        "android_client_info": {
+          "package_name": "com.KyokuMei32.GoldenTaker"
+        }
+      },
+        "oauth_client": [
+            {
+                "client_id": "67072481159-5pll9osahuhldheom60cajs92s90rtn0.apps.googleusercontent.com",
+                "client_type": 3
+            },
+            {
+                "client_id": "67072481159-7arf5d5ua1c3opoome1h68phmereqn2l.apps.googleusercontent.com",
+                "client_type": 1,
+                "android_info": {
+                    "package_name": "com.KyokuMei32.GoldenTaker",
+                    "certificate_hash": "12:B8:9F:35:BF:4A:70:6F:D4:23:9B:B2:93:D8:EB:63:FD:D1:0E:C6"
+                }
+            }
+        ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-TusDwxFafQ-OKgSUoMznUPe4sMx-dQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
