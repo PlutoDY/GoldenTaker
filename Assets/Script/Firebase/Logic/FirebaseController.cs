@@ -1,7 +1,5 @@
-using Firebase;
-using Firebase.Auth;
-using Firebase.Extensions;
 using KKM32.Services;
+using KKM32.Signal;
 using UnityEngine;
 using Zenject;
 
@@ -20,6 +18,5 @@ namespace KKM32.Controller {
         {
             _iFirebaseService.InitializeFirebases();
         }
-
     }
 }
