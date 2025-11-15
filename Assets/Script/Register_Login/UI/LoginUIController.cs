@@ -67,5 +67,11 @@ namespace KKM32.Controller
         }
 
         #endregion
+
+        [ListenToSignal(typeof(LoginCompleteSignal))]
+        public void SetTextCompletedLogin()
+        {
+            _loginUIView.SetText("LoginComplete");
+        }
     }
 }

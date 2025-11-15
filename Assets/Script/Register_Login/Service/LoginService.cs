@@ -15,8 +15,6 @@ namespace KKM32.Services {
         private readonly IAuthProvider _auth;
         private readonly IUserProvider _user;
 
-
-
         [Inject]
         public LoginService(IAuthProvider _auth, IUserProvider _user)
         {
@@ -63,8 +61,6 @@ namespace KKM32.Services {
                         if (authTask.IsCanceled)
                         {
                             signInCompleted.SetCanceled();
-
-                            Debug.Log("Firebase Auth Login In was Canceld");
                         }
                         else if (authTask.IsFaulted)
                         {

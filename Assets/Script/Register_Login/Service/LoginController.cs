@@ -14,7 +14,7 @@ namespace KKM32.Controller
 
 
         [ListenToSignal(typeof(ClickRegisterButtonSignal))]
-        public void TryRegister(ClickRegisterButtonSignal _clickRegisterButton)
+        public void TryRegister()
         {
             _iLoginService.Register();
         }

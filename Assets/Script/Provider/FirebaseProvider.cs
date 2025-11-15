@@ -27,12 +27,12 @@ public interface IUserProvider
 
 public class FirebaseProvider : IFirebaseCore, IAuthProvider, IUserProvider
 {
-    private readonly SignalBus _firebaseInitializeCompleteSignalBus;
+    private readonly SignalBus _signalBus;
 
     [Inject]
-    public FirebaseProvider(SignalBus _firebaseInitializeCompleteSignalBus)
+    public FirebaseProvider(SignalBus _signalBus)
     {
-        this._firebaseInitializeCompleteSignalBus = _firebaseInitializeCompleteSignalBus;
+        this._signalBus = _signalBus;
     }
 
     public FirebaseApp App { get; private set; }
@@ -50,16 +50,23 @@ public class FirebaseProvider : IFirebaseCore, IAuthProvider, IUserProvider
     {
         if (Auth.CurrentUser == null)
         {
-            OnCompleteInitializeFirebase();
+            onCompleteInitializeFirebase();
         }
         else
         {
             User = Auth.CurrentUser;
+
+            notifyLoginComplete();
         }
     }
 
-    public void OnCompleteInitializeFirebase()
+    private void onCompleteInitializeFirebase()
     {
-        _firebaseInitializeCompleteSignalBus.Fire(new FirebaseInitializeCompleteSignal { IsFirstLogin = true });
+        _signalBus.Fire(new FirebaseInitializeCompleteSignal { IsFirstLogin = true });
+    }
+
+    private void notifyLoginComplete()
+    {
+        _signalBus.Fire(new LoginCompleteSignal());
     }
 }

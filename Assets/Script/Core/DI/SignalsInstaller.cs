@@ -17,20 +17,38 @@ namespace KKM32.Installer
         {
             SignalBusInstaller.Install(Container);
 
-            registerSignalHandler<FirebaseInitializeCompleteSignal, LoginUIController>(action: (x, y) => x.EnableLoginUI_Event(y), true);
-            registerSignalHandler<ClickRegisterButtonSignal, LoginController>(action: (x, y) => x.TryRegister(y));
+            bindingAllInterfaces();
+
+            registerSignalHandlers();
         }
 
+        private void bindingAllInterfaces()
+        {
+            bindingInterFace<LoginUIController>(true);
+            bindingInterFace<LoginController>();
+        }
+
+        private void registerSignalHandlers()
+        {
+            registerSignalHandler<FirebaseInitializeCompleteSignal, LoginUIController>(action: (x, y) => x.EnableLoginUI_Event(y));
+            registerSignalHandler<ClickRegisterButtonSignal, LoginController>(action: (x, y) => x.TryRegister());
+            registerSignalHandler<LoginCompleteSignal, LoginUIController>(action: (x, y) => x.SetTextCompletedLogin());
+        }
+
+        private void bindingInterFace<TController>(bool nonLazy = false)
+        {
+            var bindingInterface = Container.BindInterfacesAndSelfTo<TController>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            if (nonLazy) bindingInterface.NonLazy();
+        }
+
+
         private void registerSignalHandler<TSignal, TController>(
-            Action<TController, TSignal> action,
-            bool nonLazyController = false)
+            Action<TController, TSignal> action)
         {
             Container.DeclareSignal<TSignal>().RequireSubscriber();
-
-            var controllerBinding = Container.BindInterfacesAndSelfTo<TController>()
-                                                .FromComponentInHierarchy().AsSingle();
-
-            if (nonLazyController) controllerBinding.NonLazy();
 
             Container.BindSignal<TSignal>().ToMethod(action).FromResolve();
 

@@ -19,8 +19,10 @@ namespace KKM32.UI.Login {
         [SerializeField]
         private TMP_Text _statusText;
 
-        public TMP_Text StatusText { get { return _statusText; } }
-
+        public void SetText(string statusText)
+        {
+            _statusText.text = statusText;
+        }
         #endregion
 
     }
