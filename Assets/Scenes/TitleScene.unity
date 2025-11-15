@@ -452,6 +452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _registerUIPanel: {fileID: 36341535}
+  _registerButton: {fileID: 1031855714}
+  _statusText: {fileID: 1455682412}
 --- !u!114 &756157682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,7 +575,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1031855715}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 756157682}
+        m_TargetAssemblyTypeName: KKM32.Controller.LoginUIController, Assembly-CSharp
+        m_MethodName: RegisterButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1031855715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,8 +987,8 @@ GameObject:
   - component: {fileID: 2142910041}
   - component: {fileID: 2142910040}
   - component: {fileID: 2142910039}
-  - component: {fileID: 2142910038}
   - component: {fileID: 2142910042}
+  - component: {fileID: 2142910038}
   m_Layer: 0
   m_Name: DI_Installers
   m_TagString: Untagged

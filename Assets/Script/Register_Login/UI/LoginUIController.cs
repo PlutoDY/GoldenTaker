@@ -1,9 +1,12 @@
 using KKM32.Signal;
+using KKM32.UI.Login;
+using KKM32.Util.CustomAtrribute;
 using UnityEngine;
 using Zenject;
 
 namespace KKM32.Controller
 {
+    [BindingLifetime(BindingLifetime.NonLazy)]
     public class LoginUIController : MonoBehaviour
     {
 
@@ -21,6 +24,7 @@ namespace KKM32.Controller
                 gameObject.TryGetComponent<LoginUIView>(out _loginUIView);
         }
 
+        [ListenToSignal(typeof(FirebaseInitializeCompleteSignal))]
         public void EnableLoginUI_Event(FirebaseInitializeCompleteSignal _firebaseInitializeCompleteSignal)
         {
             if (_firebaseInitializeCompleteSignal.IsFirstLogin)
@@ -31,8 +35,8 @@ namespace KKM32.Controller
 
         private void uiSetRegister()
         {
-            Debug.Log($"들었다 병신아");
             enableRegisterUI();
+            setInteractableRegisterButton(true);
         }
 
         private void enableRegisterUI()
@@ -45,6 +49,11 @@ namespace KKM32.Controller
             _loginUIView.RegisterUIPanel.SetActive(false);
         }
 
+        private void setInteractableRegisterButton(bool isActive)
+        {
+            _loginUIView.RegisterButton.interactable = true;
+        }
+
 
         #region Button Click Event
 
@@ -53,7 +62,7 @@ namespace KKM32.Controller
 
         public void RegisterButtonClick()
         {
-            _onClickRegisterButton.Fire(new ClickRegisterButton());
+            _onClickRegisterButton.Fire(new ClickRegisterButtonSignal());
             disableRegisterUI();
         }
 

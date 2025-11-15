@@ -21,7 +21,7 @@ public class GoogleSignIn : MonoBehaviour
     FirebaseAuth auth;
     FirebaseUser user;
 
-    private void firebaseInitialize() {
+/*    private void firebaseInitialize() {
 
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(fireTask =>
         {
@@ -42,7 +42,7 @@ public class GoogleSignIn : MonoBehaviour
                 statusText.text = "FirebaseInitalize Faild";
             }
         });
-    }
+    }*/
 
     public void googleSignIn()
     {

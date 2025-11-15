@@ -38,13 +38,7 @@ namespace KKM32.Services
                     _app.SetApp(FirebaseApp.DefaultInstance);
                     _auth.SetAuth(FirebaseAuth.DefaultInstance);
 
-                    Debug.Log($"Completed Firebase Initialize");
-
                     _user.SetUser();
-                }
-                else
-                {
-                    Debug.LogError($"Faild Firebase Initialize");
                 }
             });
 
