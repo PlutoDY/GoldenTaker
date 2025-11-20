@@ -1,10 +1,7 @@
 using KKM32.Controller;
 using KKM32.Signal;
 using System;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using UnityEngine;
 using Zenject;
 
 namespace KKM32.Installer
@@ -30,9 +27,9 @@ namespace KKM32.Installer
 
         private void registerSignalHandlers()
         {
-            registerSignalHandler<FirebaseInitializeCompleteSignal, LoginUIController>(action: (x, y) => x.EnableLoginUI_Event(y));
-            registerSignalHandler<ClickRegisterButtonSignal, LoginController>(action: (x, y) => x.TryRegister());
-            registerSignalHandler<LoginCompleteSignal, LoginUIController>(action: (x, y) => x.SetTextCompletedLogin());
+            registerSignalHandler<FirebaseInitializeCompleteSignal, LoginUIController>((x, y) => x.EnableLoginUI_Event(y));
+            registerSignalHandler<ClickRegisterButtonSignal, LoginController>((x, y) => x.TryRegister());
+            registerSignalHandler<LoginCompleteSignal, LoginUIController>((x, y) => x.SetTextCompletedLogin());
         }
 
         private void bindingInterFace<TController>(bool nonLazy = false)
@@ -44,14 +41,13 @@ namespace KKM32.Installer
             if (nonLazy) bindingInterface.NonLazy();
         }
 
-
-        private void registerSignalHandler<TSignal, TController>(
-            Action<TController, TSignal> action)
+        private void registerSignalHandler<TSignal, TController>(Expression<Action<TController, TSignal>> expr)
         {
             Container.DeclareSignal<TSignal>().RequireSubscriber();
 
-            Container.BindSignal<TSignal>().ToMethod(action).FromResolve();
+            var action = expr.Compile();
 
+            Container.BindSignal<TSignal>().ToMethod(action).FromResolve(); ;
         }
 
 /*       private void _registerFirebaseInitializeCompleteSignal()
