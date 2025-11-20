@@ -51,18 +51,18 @@ namespace KKM32.Controller
 
         private void setInteractableRegisterButton(bool isActive)
         {
-            _loginUIView.RegisterButton.interactable = true;
+            _loginUIView.RegisterButton.interactable = isActive;
         }
 
 
         #region Button Click Event
 
         [Inject]
-        private readonly SignalBus _onClickRegisterButton;
+        private readonly SignalBus _signalBus;
 
         public void RegisterButtonClick()
         {
-            _onClickRegisterButton.Fire(new ClickRegisterButtonSignal());
+            _signalBus.Fire(new ClickRegisterButtonSignal());
             disableRegisterUI();
         }
 
