@@ -1,12 +1,10 @@
 using KKM32.Signal;
 using KKM32.UI.Login;
-using KKM32.Util.CustomAtrribute;
 using UnityEngine;
 using Zenject;
 
 namespace KKM32.Controller
 {
-    [BindingLifetime(BindingLifetime.NonLazy)]
     public class LoginUIController : MonoBehaviour
     {
 
@@ -24,7 +22,6 @@ namespace KKM32.Controller
                 gameObject.TryGetComponent<LoginUIView>(out _loginUIView);
         }
 
-        [ListenToSignal(typeof(FirebaseInitializeCompleteSignal))]
         public void EnableLoginUI_Event(FirebaseInitializeCompleteSignal _firebaseInitializeCompleteSignal)
         {
             if (_firebaseInitializeCompleteSignal.IsFirstLogin)
@@ -67,8 +64,6 @@ namespace KKM32.Controller
         }
 
         #endregion
-
-        [ListenToSignal(typeof(LoginCompleteSignal))]
         public void SetTextCompletedLogin()
         {
             _loginUIView.SetText("LoginComplete");
